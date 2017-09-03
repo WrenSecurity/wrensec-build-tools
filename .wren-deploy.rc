@@ -1,0 +1,14 @@
+export MAVEN_PACKAGE="forgerock-build-tools"
+export BINTRAY_PACKAGE="wrensec-build-tools"
+export JFROG_PACKAGE="org/forgerock/forgerock-build-tools/"
+
+package_accept_release_tag() {
+  local tag_name="${1}"
+  
+  if [ "${tag_name}" == "1.0.2-1" ]; then
+    echo "Skipping 1.0.2-1 since org.forgerock:forgerock-parent:pom:2.0.15 is missing."
+    return -1
+  else
+    return 0
+  fi
+}
