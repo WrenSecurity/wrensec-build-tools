@@ -19,9 +19,9 @@
         "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
         "https://checkstyle.org/dtds/suppressions_1_2.dtd">
 <suppressions>
-    <!-- 
-        This Checkstyle suppressions file contains suppressions for any checks that 
-        we don't want to enforce against unit tests. 
+    <!--
+        This Checkstyle suppressions file contains suppressions for any checks that
+        we don't want to enforce against unit tests.
     -->
 
     <!-- check-src-default.xml -->

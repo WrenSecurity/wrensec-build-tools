@@ -722,7 +722,7 @@ public final class ForgeRockTestListener extends TestListenerAdapter implements 
             topGroup = topGroup.getParent();
         }
 
-        final Thread threads[] = new Thread[topGroup.activeCount() * 2];
+        final Thread[] threads = new Thread[topGroup.activeCount() * 2];
         final int numThreads = topGroup.enumerate(threads);
 
         final List<String> activeThreads = new ArrayList<String>();
