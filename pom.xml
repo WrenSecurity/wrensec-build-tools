@@ -1,129 +1,127 @@
 <?xml version="1.0"?>
 <!--
-  The contents of this file are subject to the terms of the Common Development and
-  Distribution License (the License). You may not use this file except in compliance with the
-  License.
+    The contents of this file are subject to the terms of the Common Development and
+    Distribution License (the License). You may not use this file except in compliance with the
+    License.
 
-  You can obtain a copy of the License at legal/CDDLv1.0.txt. See the License for the
-  specific language governing permission and limitations under the License.
+    You can obtain a copy of the License at legal/CDDLv1.1.txt. See the License for the
+    specific language governing permission and limitations under the License.
 
-  When distributing Covered Software, include this CDDL Header Notice in each file and include
-  the License file at legal/CDDLv1.0.txt. If applicable, add the following below the CDDL
-  Header, with the fields enclosed by brackets [] replaced by your own identifying
-  information: "Portions Copyrighted [year] [name of copyright owner]".
+    When distributing Covered Software, include this CDDL Header Notice in each file and include
+    the License file at legal/CDDLv1.1.txt. If applicable, add the following below the CDDL
+    Header, with the fields enclosed by brackets [] replaced by your own identifying
+    information: "Portions copyright [year] [name of copyright owner]".
 
-  Copyright 2012-2015 ForgeRock AS. All rights reserved.
-  Portions Copyright © 2017 Wren Security. All rights reserved.
+    Copyright 2012-2015 ForgeRock AS. All rights reserved.
+    Portions Copyright 2017-2021 Wren Security.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.forgerock</groupId>
-    <artifactId>forgerock-parent</artifactId>
-    <version>2.0.3</version>
-  </parent>
-  <artifactId>forgerock-build-tools</artifactId>
-  <version>1.0.3</version>
-  <packaging>jar</packaging>
-  <name>Wren Security Common Maven Build Tools</name>
-  <description>
-    This module includes common infrastructure required for building Wren
-    Security forks of ForgeRock projects, comprising of TestNG listeners,
-    Checkstyle configuration, etc.
-  </description>
-  <url>http://wrensecurity.org</url>
-  <scm>
-    <url>https://github.com/WrenSecurity/wrensec-build-tools</url>
-    <connection>scm:git:git://github.com/WrenSecurity/wrensec-build-tools.git</connection>
-    <developerConnection>scm:git:git@github.com:WrenSecurity/wrensec-build-tools.git</developerConnection>
-  </scm>
-  <licenses>
-    <license>
-      <name>CDDL 1.0</name>
-      <url>http://www.opensource.org/licenses/CDDL-1.0</url>
-      <comments>Common Development and Distribution License (CDDL) 1.0.
-        This license applies as indicated in the source files.</comments>
-      <distribution>repo</distribution>
-    </license>
-    <license>
-      <name>GNU LGPL 2.1</name>
-      <url>http://opensource.org/licenses/LGPL-2.1</url>
-      <comments>The GNU Lesser General Public License, version 2.1. This license
-        applies to the patch for the Checkstyle indentation checker
-        as indicated in the source files.</comments>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <distributionManagement>
-    <snapshotRepository>
-      <id>wrensecurity-snapshots</id>
-      <name>Wren Security Snapshot Repository</name>
-      <url>${forgerockDistMgmtSnapshotsUrl}</url>
-    </snapshotRepository>
+    <modelVersion>4.0.0</modelVersion>
 
-    <repository>
-      <id>wrensecurity-releases</id>
-      <name>Wren Security Release Repository</name>
-      <url>${forgerockDistMgmtReleasesUrl}</url>
-    </repository>
-  </distributionManagement>
-  <repositories>
-    <!-- Needed to retrieve parent POM -->
-    <repository>
-      <id>wrensecurity-releases</id>
-      <name>Wren Security Release Repository</name>
-      <url>https://wrensecurity.jfrog.io/wrensecurity/releases</url>
+    <parent>
+        <groupId>org.wrensecurity</groupId>
+        <artifactId>wrensec-parent</artifactId>
+        <version>3.2.0</version>
+    </parent>
 
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
+    <artifactId>wrensec-build-tools</artifactId>
+    <version>1.1.0-SNAPSHOT</version>
 
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-    </repository>
-  </repositories>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <inherited>true</inherited>
-        <configuration>
-            <!-- Disable inherited configuration -->
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <mavenExecutorId>forked-path</mavenExecutorId>
-          <useReleaseProfile>true</useReleaseProfile>
-          <suppressCommitBeforeTag>false</suppressCommitBeforeTag>
-          <goals>deploy</goals>
-          <arguments>-Penforce</arguments>
-        </configuration>
-      </plugin>
+    <name>Wren Security Common Maven Build Tools</name>
+    <description>
+        This module includes common infrastructure required for building Wren
+        Security forks of ForgeRock projects, comprising of TestNG listeners,
+        Checkstyle configuration, etc.
+    </description>
 
-      <plugin>
-        <groupId>org.forgerock.maven.plugins</groupId>
-        <artifactId>javadoc-updater-maven-plugin</artifactId>
-        <version>1.0.0</version>
-        <executions>
-          <execution>
-            <phase>site</phase>
-            <goals>
-              <goal>fixjavadoc</goal>
-            </goals>
-            <configuration>
-              <directory>${project.reporting.outputDirectory}</directory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>6.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
+    <url>http://wrensecurity.org</url>
+
+    <scm>
+        <url>https://github.com/WrenSecurity/wrensec-build-tools</url>
+        <connection>scm:git:git://github.com/WrenSecurity/wrensec-build-tools.git</connection>
+        <developerConnection>scm:git:git@github.com:WrenSecurity/wrensec-build-tools.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>CDDL 1.0</name>
+            <url>http://www.opensource.org/licenses/CDDL-1.0</url>
+            <comments>Common Development and Distribution License (CDDL) 1.0.
+                This license applies as indicated in the source files.</comments>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>GNU LGPL 2.1</name>
+            <url>http://opensource.org/licenses/LGPL-2.1</url>
+            <comments>The GNU Lesser General Public License, version 2.1. This license
+                applies to the patch for the Checkstyle indentation checker
+                as indicated in the source files.</comments>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>wrensecurity-snapshots</id>
+            <name>Wren Security Snapshot Repository</name>
+            <url>${wrenDistMgmtSnapshotsUrl}</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>wrensecurity-releases</id>
+            <name>Wren Security Release Repository</name>
+            <url>${wrenDistMgmtReleasesUrl}</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <!-- Needed to retrieve parent POM -->
+        <repository>
+            <id>wrensecurity-releases</id>
+            <name>Wren Security Release Repository</name>
+            <url>https://wrensecurity.jfrog.io/wrensecurity/releases</url>
+
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <properties>
+        <checkstyleSourceConfigLocation>${project.build.outputDirectory}/org/forgerock/checkstyle/check-src-default-ide.xml</checkstyleSourceConfigLocation>
+        <checkstyleHeaderLocation>${project.build.outputDirectory}/org/forgerock/checkstyle/default-java-header</checkstyleHeaderLocation>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <!-- Disable inherited configuration -->
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <useReleaseProfile>true</useReleaseProfile>
+                    <suppressCommitBeforeTag>false</suppressCommitBeforeTag>
+                    <goals>deploy</goals>
+                    <arguments>-Penforce</arguments>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.3.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>

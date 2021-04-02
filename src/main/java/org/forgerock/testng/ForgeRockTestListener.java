@@ -413,41 +413,32 @@ public final class ForgeRockTestListener extends TestListenerAdapter implements 
 
         // Read the comments in ForgeRockTestCase to understand what's
         // going on here.
-        final Object[] testInstances = result.getMethod().getInstances();
-        for (final Object testInstance : testInstances) {
-            if (testInstance instanceof ForgeRockTestCase) {
-                final ForgeRockTestCase testCase = (ForgeRockTestCase) testInstance;
-                final Object[] parameters = result.getParameters();
-                if (result.getStatus() == ITestResult.SUCCESS) {
-                    testCase.addParamsFromSuccessfulTests(parameters);
-                    // This can eat up a bunch of memory for tests that are
-                    // expected to throw
-                    result.setThrowable(null);
-                } else {
-                    testCase.addParamsFromFailedTest(parameters);
-
-                    /*
-                     * When the test finishes later on, we might not have
-                     * everything that we need to print the result, so go ahead
-                     * and convert it to a String now.
-                     */
-                    result.setParameters(convertToStringParameters(parameters));
-                }
+        final Object testInstance = result.getMethod().getInstance();
+        if (testInstance instanceof ForgeRockTestCase) {
+            final ForgeRockTestCase testCase = (ForgeRockTestCase) testInstance;
+            final Object[] parameters = result.getParameters();
+            if (result.getStatus() == ITestResult.SUCCESS) {
+                testCase.addParamsFromSuccessfulTests(parameters);
+                // This can eat up a bunch of memory for tests that are
+                // expected to throw
+                result.setThrowable(null);
             } else {
-                // We already warned about it.
+                testCase.addParamsFromFailedTest(parameters);
+
+                /*
+                 * When the test finishes later on, we might not have
+                 * everything that we need to print the result, so go ahead
+                 * and convert it to a String now.
+                 */
+                result.setParameters(convertToStringParameters(parameters));
             }
+        } else {
+            // We already warned about it.
         }
     }
 
     private void checkForInterleavedBetweenClasses(final ITestResult tr) {
-        final Object[] testInstances = tr.getMethod().getInstances();
-        // This will almost always have a single element. If it doesn't,
-        // just skip it.
-        if (testInstances.length != 1) {
-            return;
-        }
-
-        final Object testInstance = testInstances[0];
+        final Object testInstance = tr.getMethod().getInstance();
 
         // We're running another test on the same test object. Everything is
         // fine.
