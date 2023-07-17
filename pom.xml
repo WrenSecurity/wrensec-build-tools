@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.wrensecurity</groupId>
         <artifactId>wrensec-parent</artifactId>
-        <version>3.2.1-SNAPSHOT</version>
+        <version>4.0.0</version>
     </parent>
 
     <artifactId>wrensec-build-tools</artifactId>
@@ -65,13 +65,13 @@
         <snapshotRepository>
             <id>wrensecurity-snapshots</id>
             <name>Wren Security Snapshot Repository</name>
-            <url>${wrenDistMgmtSnapshotsUrl}</url>
+            <url>https://wrensecurity.jfrog.io/wrensecurity/snapshots</url>
         </snapshotRepository>
 
         <repository>
             <id>wrensecurity-releases</id>
             <name>Wren Security Release Repository</name>
-            <url>${wrenDistMgmtReleasesUrl}</url>
+            <url>https://wrensecurity.jfrog.io/wrensecurity/releases</url>
         </repository>
     </distributionManagement>
 
@@ -115,6 +115,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.wrensecurity.commons</groupId>
+                <artifactId>commons-bom</artifactId>
+                <version>22.5.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
