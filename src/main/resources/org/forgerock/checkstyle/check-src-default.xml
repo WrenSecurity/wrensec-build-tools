@@ -150,7 +150,7 @@
             <property name="accessModifiers" value="public,protected" />
         </module>
         <module name="JavadocVariable">
-            <property name="scope" value="protected" />
+            <property name="accessModifier" value="public,protected" />
         </module>
 
         <!-- If Javadoc is present then it must be valid -->
